@@ -31,7 +31,7 @@
                     <line class="arm2 hide" x1="224.354" y1="204.646" x2="259.709" y2="240.002" stroke-width="3" stroke="var(--white)" />
                 </svg>
                 <div class="textcontainer" style="display: grid; place-items: center;">
-                    <div id="text"></div>
+                    <p id="text"></p>
                 </div>
                 <div id="keys">
                     <div class="key a">a</div>
@@ -64,7 +64,14 @@
             </div>
         </div>
         <div id="tries">
-            Failed attempts left: <span id="failures"></span>
+            Failed attempts left: <span id="failures"></span><br>
+
+            <button id="languages-button">Languages</button>
+        </div>
+        <div id="languages-container" class="hide">
+            <div id="languages-box">
+                <button id="languages-button-close">X</button>
+            </div>
         </div>
         <div id="winning" class="hide">
             <div class="innerpopup"></div>

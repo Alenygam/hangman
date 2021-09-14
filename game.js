@@ -6,7 +6,7 @@ let exposedChars;
 main()
 
 async function main() {
-  const details = await getEnglish();
+  const details = await getLanguage(localStorage.getItem("hangman_language"));
   const words = details.words;
 
   const randomNumber = getRandomNumberFromRange(0, words.length - 1);
@@ -15,6 +15,38 @@ async function main() {
 
   exposedChars = initializePlayingField(randomWordAsArray);
   handleButtons(randomWordAsArray);
+  handleLanguages();
+}
+
+async function handleLanguages() {
+  const languageList = await getLanguages();
+  var isopen = false;
+  const languagesContainer = document.querySelector('#languages-box');
+
+  languageList.forEach((element) => {
+    const button = document.createElement('button');
+    button.innerText = element;
+    button.onclick = () => setLanguage(element);
+    languagesContainer.appendChild(button);
+  })
+
+  const languagesButton = document.querySelector("#languages-button");
+  languagesButton.addEventListener("click", () => {
+    isopen = !isopen;
+    openLanguagePopup(isopen);
+  })
+  document.querySelector("#languages-button-close").addEventListener("click", () => {
+    isopen = false;
+    openLanguagePopup(isopen);
+  })
+}
+
+function openLanguagePopup(toopen) {
+  if (toopen) {
+    document.querySelector("#languages-container").classList.remove('hide');
+  } else {
+    document.querySelector("#languages-container").classList.add('hide');
+  }
 }
 
 function handleButtons(word) {
@@ -198,11 +230,23 @@ function getRandomNumberFromRange(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
 }
 
-/*
- * Temporary function that gets the english language's words
- *
- * TODO: multiple languages.
- */
-async function getEnglish() {
-  return await fetch("/languages/english.json").then(res => res.json())
+/**
+  * Function that fetches language
+  *
+  * @param language {String} language to get fetched, if undefined it's set to english by default.
+  *
+  * @return json of language
+  */
+async function getLanguage(language = "english") {
+  localStorage.setItem("hangman_language", language)
+  return await fetch(`/languages/${language}.json`).then(res => res.json())
+}
+
+async function getLanguages() {
+  return await fetch(`/languages/languages.json`).then(res => res.json());
+}
+
+function setLanguage(language) {
+  localStorage.setItem("hangman_language", language);
+  location.reload();
 }

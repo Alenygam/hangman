@@ -28,10 +28,19 @@
     grid-gap: 2em;
 }
 
+@media (min-width: 1115px) {
+    .box {
+        min-width: 600px;
+    }
+}
+
 #text {
     text-transform: uppercase;
     font-size: 4em;
     text-align: center;
+    word-break: break-all;
+    white-space: normal;
+    max-width: 9ch;
 }
 #text > span {
     margin: 0 .1em;
@@ -69,9 +78,6 @@
     color: var(--white);
 }
 
-button:hover {
-    border: solid 1px var(--black);
-}
 
 button {
     font-size: 1em;
@@ -81,6 +87,11 @@ button:hover, #keys > .key:hover, #keys > .key.success, #keys > .key.success:hov
     transform: scale(1.1);
     background-color: var(--white);
     color: var(--black);
+}
+
+button:hover {
+    border: solid 1px var(--black);
+    transform: scale(1)!important;
 }
 
 #keys > .key.success {
@@ -118,6 +129,47 @@ button:hover, #keys > .key:hover, #keys > .key.success, #keys > .key.success:hov
 
 .hide {
     display: none!important;
+}
+
+#languages-button {
+    font-size: 1.5rem;
+}
+
+#languages-container {
+    font-size: 1.5rem;
+    border-radius: .5em;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 999;
+    width: 300px;
+    height: 400px;
+    border: solid 1px var(--white);
+    background-color: var(--black);
+}
+
+#languages-box {
+    overflow: auto;
+    height: 100%;
+    position: relative;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#languages-button-close {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 50%;
+    margin: 0;
+}
+
+#languages-box > * {
+    margin: .5em;
 }
 
 @media (max-width: 1115px) {
