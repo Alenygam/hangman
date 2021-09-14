@@ -237,7 +237,8 @@ function getRandomNumberFromRange(min, max) {
   *
   * @return json of language
   */
-async function getLanguage(language = "english") {
+async function getLanguage(language) {
+  if (!language) language = "english";
   localStorage.setItem("hangman_language", language)
   return await fetch(`/languages/${language}.json`).then(res => res.json())
 }
