@@ -7,4 +7,3 @@ Fun project I wrote in my free time. It is a hangman game written in only html, 
 ## TODO
 
 + Theme switching
-+ Language switching
